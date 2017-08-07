@@ -19,7 +19,7 @@ jobs:
           name: Build Docker image
           command: |
             set -ex
-            docker build -t circleci:$(cat VERSION) .
+            docker build -t deliveroo/circleci:$(cat VERSION) .
 
   02_test_image:
     <<: *defaults
@@ -34,7 +34,7 @@ jobs:
           name: Check if dependecies are installed
           command: |
             set -ex
-            export image=circleci:$(cat VERSION)
+            export image=deliveroo/circleci:$(cat VERSION)
             docker run $image bash -c 'which docker'
             docker run $image bash -c 'which docker-compose'
             docker run $image bash -c 'which ci'
@@ -56,7 +56,7 @@ jobs:
 
       - run:
           name: Push the image
-          command: docker push circleci:$(cat VERSION)
+          command: docker push deliveroo/circleci:$(cat VERSION)
 
 workflows:
   version: 2
