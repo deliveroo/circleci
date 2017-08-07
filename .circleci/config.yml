@@ -41,6 +41,23 @@ jobs:
             docker run $image bash -c 'which python'
             docker run $image bash -c 'which wfi'
 
+  03_push_image:
+    <<: *defaults
+
+    steps:
+      - setup_remote_docker:
+          reusable: true
+
+      - checkout
+
+      - run:
+          name: Log in to Docker repository
+          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+
+      - run:
+          name: Push the image
+          command: doceker push circleci:$(cat VERSION)
+
 workflows:
   version: 2
   test:
@@ -49,3 +66,10 @@ workflows:
       - 02_test_image:
           requires:
             - 01_build_image
+      - 03_push_image:
+          requires:
+            - 02_test_image
+          filters:
+            branches:
+              only:
+                - master
