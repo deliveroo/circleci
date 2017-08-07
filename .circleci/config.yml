@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: /circleci
   docker:
-    - image: docker:17.06-ce-git
+    - image: docker:17.06.0-ce-git
 
 version: 2
 
