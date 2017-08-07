@@ -32,11 +32,12 @@ jobs:
           name: Check if dependecies are installed
           command: |
             set -ex
-            docker run circleci bash -c 'which docker'
-            docker run circleci bash -c 'which docker-compose'
-            docker run circleci bash -c 'which ci'
-            docker run circleci bash -c 'which python'
-            docker run circleci bash -c 'which wfi'
+            export image=circleci:$(cat VERSION)
+            docker run $image bash -c 'which docker'
+            docker run $image bash -c 'which docker-compose'
+            docker run $image bash -c 'which ci'
+            docker run $image bash -c 'which python'
+            docker run $image bash -c 'which wfi'
 
 workflows:
   version: 2
