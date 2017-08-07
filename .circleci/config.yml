@@ -56,7 +56,7 @@ jobs:
 
       - run:
           name: Push the image
-          command: doceker push circleci:$(cat VERSION)
+          command: docker push circleci:$(cat VERSION)
 
 workflows:
   version: 2
