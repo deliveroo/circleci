@@ -19,7 +19,7 @@ jobs:
           name: Build Docker image
           command: |
             set -ex
-            docker build -t circleci .
+            docker build -t circleci:$(cat VERSION) .
 
   02_test_image:
     <<: *defaults
