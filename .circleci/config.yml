@@ -21,7 +21,7 @@ jobs:
             set -ex
             docker build -t circleci:$(cat VERSION) .
 
-      run:
+      - run:
           name: Check if dependecies are installed
           command: |
             set -ex
