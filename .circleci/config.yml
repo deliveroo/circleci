@@ -21,6 +21,16 @@ jobs:
             set -ex
             docker build -t circleci:$(cat VERSION) .
 
+      run:
+          name: Check if dependecies are installed
+          command: |
+            set -ex
+            which docker
+            which docker-compose
+            which ci
+            which python
+            which wfi
+
 workflows:
   version: 2
   test:
