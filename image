@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}:$(cat VERSION)

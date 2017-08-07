@@ -1,6 +1,7 @@
 .circleci
 .git
 Dockerfile
+image
 LICENSE
 README.md
 VERSION
