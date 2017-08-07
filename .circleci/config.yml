@@ -6,7 +6,7 @@ defaults: &defaults
 version: 2
 
 jobs:
-  01_run_ci:
+  01_build_image:
     <<: *defaults
 
     steps:
@@ -19,20 +19,30 @@ jobs:
           name: Build Docker image
           command: |
             set -ex
-            docker build -t circleci:$(cat VERSION) .
+            docker build -t circleci .
+
+  02_test_image:
+    <<: *defaults
+
+    steps:
+      - setup_remote_docker:
+          reusable: true
 
       - run:
           name: Check if dependecies are installed
           command: |
             set -ex
-            which docker
-            which docker-compose
-            which ci
-            which python
-            which wfi
+            docker run circleci bash -c 'which docker'
+            docker run circleci bash -c 'which docker-compose'
+            docker run circleci bash -c 'which ci'
+            docker run circleci bash -c 'which python'
+            docker run circleci bash -c 'which wfi'
 
 workflows:
   version: 2
   test:
     jobs:
-      - 01_run_ci
+      - 01_build_image
+      - 02_test_image:
+          requires:
+            - 01_build_image
