@@ -9,7 +9,7 @@ RUN apk add --no-cache bash \
                        py-pip \
                        tar \
     && pip install --upgrade pip \
-    && pip install awscli==${AWSCLI_VERSION} docker-compose
+    && pip install awscli==${AWSCLI_VERSION} boto3 docker-compose requests
 
 # Install Terraform binary.
 ENV TERRAFORM_VERSION=0.10.0
@@ -22,5 +22,6 @@ RUN set -ex \
     && unzip $FILENAME \
     && rm $FILENAME
 
-ADD ci /usr/bin/ci
-ADD wait-for-it.sh /usr/bin/wfi
+ADD scripts/ci /usr/bin/ci
+ADD scripts/ecr-cleanup.py /usr/bin/ecr-cleanup
+ADD scripts/wait-for-it.sh /usr/bin/wfi
