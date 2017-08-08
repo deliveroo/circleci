@@ -35,10 +35,12 @@ jobs:
           command: |
             set -ex
             export image=$(./image)
+            docker run $image bash -c 'which aws'
             docker run $image bash -c 'which docker'
             docker run $image bash -c 'which docker-compose'
             docker run $image bash -c 'which ci'
             docker run $image bash -c 'which python'
+            docker run $image bash -c 'which terraform'
             docker run $image bash -c 'which wfi'
 
   03_push_image:
