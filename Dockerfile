@@ -1,5 +1,6 @@
 FROM docker:17.03.2-ce
 
+ENV AWSCLI_VERSION=1.11.129
 RUN apk add --no-cache bash \
                        curl \
                        git \
@@ -8,7 +9,7 @@ RUN apk add --no-cache bash \
                        py-pip \
                        tar \
     && pip install --upgrade pip \
-    && pip install awscli docker-compose
+    && pip install awscli==${AWSCLI_VERSION} docker-compose
 
 # Install Terraform binary.
 ENV TERRAFORM_VERSION=0.10.0
