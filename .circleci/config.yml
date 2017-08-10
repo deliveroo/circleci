@@ -39,6 +39,7 @@ jobs:
             docker run $image bash -c 'which ci'
             docker run $image bash -c 'which docker'
             docker run $image bash -c 'which docker-compose'
+            docker run $image bash -c 'which ensure_head'
             docker run $image bash -c 'which heroku'
             docker run $image bash -c 'which python'
             docker run $image bash -c 'which terraform'
