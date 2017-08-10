@@ -1,0 +1,10 @@
+0.1.2
+---
+
+- Added Heroku CLI (`heroku`);
+
+0.1.1
+---
+
+- Added Terraform CLI (`terraform`);
+- Added AWS CLI (`aws`);

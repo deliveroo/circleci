@@ -1,8 +1,10 @@
-FROM docker:17.03.2-ce
+FROM node:8.2.1-alpine
 
 ENV AWSCLI_VERSION=1.11.129
+ENV DOCKER_VERSION=17.05.0-r0
 RUN apk add --no-cache bash \
                        curl \
+                       docker=$DOCKER_VERSION \
                        git \
                        gzip \
                        openssh-client \
@@ -21,6 +23,10 @@ RUN set -ex \
     && curl ${HOSTPATH}/${FILENAME} -o $FILENAME \
     && unzip $FILENAME \
     && rm $FILENAME
+
+# Install Heroku CLI.
+ENV HEROKU_VERSION=6.13.10
+RUN npm install -g heroku-cli@$HEROKU_VERSION
 
 ADD ci /usr/bin/ci
 ADD wait-for-it.sh /usr/bin/wfi
