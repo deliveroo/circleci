@@ -28,7 +28,7 @@ RUN set -ex \
 ENV HEROKU_VERSION=6.13.10
 RUN npm install -g heroku-cli@$HEROKU_VERSION
 
-ADD scripts/ci /usr/bin/ci
+ADD scripts/ci.sh /usr/bin/ci
 ADD scripts/ensure_head.sh /usr/bin/ensure_head
 ADD scripts/push_to_heroku.sh /usr/bin/push_to_heroku
 ADD scripts/wait-for-it.sh /usr/bin/wfi

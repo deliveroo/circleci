@@ -9,6 +9,16 @@ fi
 
 APP_NAME=$1
 
+if [ -z "$HEROKU_LOGIN" ]; then
+  echo "Please set HEROKU_LOGIN variable in CircleCI project settings"
+  exit 1
+fi
+
+if [ -z "$HEROKU_API_KEY" ]; then
+  echo "Please set HEROKU_API_KEY variable in CircleCI project settings"
+  exit 1
+fi
+
 cat > ~/.netrc << EOF
 machine git.heroku.com
   login $HEROKU_LOGIN
