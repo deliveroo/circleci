@@ -46,7 +46,7 @@ Now in your test steps you can use `wfi` to wait for the DB to come up before yo
 ```yaml
 - run:
     name: Wait for the DB to start
-    command: ci run --rm wait db:5432
+    command: ci run --rm wait wfi db:5432
 
 - run:
     name: Set up the DB
