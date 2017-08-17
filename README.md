@@ -61,8 +61,8 @@ In order to use `ensure_head`, just add it as a step to your CircleCI config fil
 
 ```yaml
 - run:
-  name: Ensure HEAD
-  command: ensure_head
+    name: Ensure HEAD
+    command: ensure_head
 ```
 
 ## Custom helper: `push_to_heroku`
@@ -73,8 +73,37 @@ In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this
 
 ```yaml
 - run:
-  name: Push to staging
-  command: push_to_heroku $staging_app_name
+    name: Push to staging
+    command: push_to_heroku $staging_app_name
+```
+
+## Custom helper: `push_image_to_ecr`
+
+`push_image_to_ecr` wraps around the logic required to use your AWS environment
+variables to log in to an ECR repository and tag and push your local image there. In order to use it, you will need to set two environment variables in the CircleCI project dashboard: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` - these are used by the AWS CLI that lets us retrieve Docker credentials.
+
+In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo. Please mind the fact that options can't use `=` between key and value - it's not supported it in the Bash script.
+
+```yaml
+- run:
+    name: Push image to ECR
+    command: |
+      push_image_to_ecr \
+        --image-name IMAGE_NAME \
+        --ecr-repo ECR_REPO \
+        --aws-region AWS_REGION
+```
+
+## Custom helper: `push_sha_to_terraform`
+
+`push_sha_to_terraform` wraps around the logic required to change the value of the `sha` variable in your Terraform Enterprise environment, and trigger a new run.
+
+In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo:
+
+```yaml
+- run:
+    name: Push SHA to Terraform
+    command: push_sha_to_terraform ATLAS_ENVIRONMENT
 ```
 
 ## Future work

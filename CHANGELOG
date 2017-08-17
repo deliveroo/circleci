@@ -1,3 +1,9 @@
+0.1.5
+---
+
+- Added `push_image_to_ecr` script;
+- Added `push_sha_to_terraform` script;
+
 0.1.4
 ---
 
