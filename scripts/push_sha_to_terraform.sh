@@ -21,7 +21,7 @@ env_endpoint="${api_endpoint}/environments/${ATLAS_ENVIRONMENT}"
 curl ${env_endpoint}/variables \
      -X PUT \
      -H 'Content-Type: application/json' \
-     -d "{\"variables\":{\"sha\":\"$CIRCLE_SHA1\"}}" \
+     -d "{\"variables\":{\"deploy_sha\":\"$CIRCLE_SHA1\"}}" \
      -H "X-Atlas-Token: $ATLAS_TOKEN"
 
 # Trigger a new Terraform plan.
