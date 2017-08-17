@@ -98,7 +98,7 @@ In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this
 
 `push_sha_to_terraform` wraps around the logic required to change the value of the `sha` variable in your Terraform Enterprise environment, and trigger a new run.
 
-In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo:
+In order to use `push_sha_to_terraform` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo:
 
 ```yaml
 - run:
