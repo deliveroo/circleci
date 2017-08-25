@@ -37,6 +37,7 @@ jobs:
             export image=$(./image)
             docker run $image bash -c 'which aws'
             docker run $image bash -c 'which ci'
+            docker run $image bash -c 'which clean_up_reusable_docker'
             docker run $image bash -c 'which docker'
             docker run $image bash -c 'which docker-compose'
             docker run $image bash -c 'which ensure_head'

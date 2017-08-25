@@ -106,6 +106,16 @@ In order to use `push_sha_to_terraform` in your CircleCI pipeline, add a step li
     command: push_sha_to_terraform ATLAS_ENVIRONMENT
 ```
 
+## Custom helper: `clean_up_reusable_docker`
+
+`clean_up_reusable_docker` wraps around the logic required to remove dangling containers, and old images from the remote Docker host used by CircleCI. It's a way to still be able to use cache, while not wasting all that space:
+
+```yaml
+- run:
+    name: Clean up reusable Docker
+    command: clean_up_reusable_docker
+```
+
 ## Future work
 
 Over time we may end up adding utilities here to help us work with various other parts of our infrastructure.
