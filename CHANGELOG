@@ -1,0 +1,26 @@
+0.1.5
+---
+
+- Added `push_image_to_ecr` script;
+- Added `push_sha_to_terraform` script;
+
+0.1.4
+---
+
+- Added `push_to_heroku` script;
+
+0.1.3
+---
+
+- Added `ensure_head` script;
+
+0.1.2
+---
+
+- Added Heroku CLI (`heroku`);
+
+0.1.1
+---
+
+- Added Terraform CLI (`terraform`);
+- Added AWS CLI (`aws`);
