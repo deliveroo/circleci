@@ -11,7 +11,7 @@ RUN apk add --no-cache bash \
                        py-pip \
                        tar \
     && pip install --upgrade pip \
-    && pip install awscli==${AWSCLI_VERSION} docker-compose
+    && pip install awscli==${AWSCLI_VERSION} boto3 docker-compose requests
 
 # Install Terraform binary.
 ENV TERRAFORM_VERSION=0.10.0

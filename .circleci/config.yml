@@ -64,7 +64,9 @@ jobs:
 
       - run:
           name: Push the image
-          command: docker push $(./image)
+          command: |
+            set -ex
+            docker push $(./image)
 
 workflows:
   version: 2
