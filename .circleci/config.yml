@@ -43,6 +43,8 @@ jobs:
       - setup_remote_docker:
           reusable: true
 
+      - checkout
+
       - run: &import_image
           name: Import Docker image
           command: |
@@ -75,6 +77,8 @@ jobs:
 
       - setup_remote_docker:
           reusable: true
+
+      - checkout
 
       - run:
           <<: *import_image
