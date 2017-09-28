@@ -37,13 +37,13 @@ jobs:
     <<: *defaults
 
     steps:
-      - attach_workspace:
-          at: workspace
-
       - setup_remote_docker:
           reusable: true
 
       - checkout
+
+      - attach_workspace:
+          at: workspace
 
       - run: &import_image
           name: Import Docker image
@@ -72,13 +72,13 @@ jobs:
     <<: *defaults
 
     steps:
-      - attach_workspace:
-          at: workspace
-
       - setup_remote_docker:
           reusable: true
 
       - checkout
+
+      - attach_workspace:
+          at: workspace
 
       - run:
           <<: *import_image
