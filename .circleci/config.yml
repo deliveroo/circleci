@@ -25,6 +25,7 @@ jobs:
           name: Save Docker image
           command: |
             set -ex
+            mkdir -p workspace
             docker save $(./image) --output workspace/${CIRCLE_SHA1}.tar
 
       - persist_to_workspace:
