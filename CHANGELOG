@@ -1,3 +1,15 @@
+0.1.7
+---
+
+- Improved `clean_up_reusable_docker` script;
+- Removed `terraform` CLI;
+- Removed `push_sha_to_terraform` script;
+
+0.1.6
+---
+
+- Added `clean_up_reusable_docker` script;
+
 0.1.5
 ---
 
