@@ -21,14 +21,32 @@ jobs:
             set -ex
             docker build -t $(./image) .
 
+      - run:
+          name: Save Docker image
+          command: |
+            set -ex
+            docker save $(./image) --output workspace/${CIRCLE_SHA1}.tar
+
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - '*.tar'
+
   02_test_image:
     <<: *defaults
 
     steps:
+      - attach_workspace:
+        at: workspace
+
       - setup_remote_docker:
           reusable: true
 
-      - checkout
+      - run: &import_image
+          name: Import Docker image
+          command: |
+            set -ex
+            docker load --input workspace/${CIRCLE_SHA1}.tar
 
       - run:
           name: Check if dependecies are installed
@@ -51,10 +69,14 @@ jobs:
     <<: *defaults
 
     steps:
+      - attach_workspace:
+        at: workspace
+
       - setup_remote_docker:
           reusable: true
 
-      - checkout
+      - run:
+          <<: *import_image
 
       - run:
           name: Log in to Docker repository
