@@ -43,10 +43,8 @@ jobs:
             docker run $image bash -c 'which ensure_head'
             docker run $image bash -c 'which heroku'
             docker run $image bash -c 'which push_image_to_ecr'
-            docker run $image bash -c 'which push_sha_to_terraform'
             docker run $image bash -c 'which push_to_heroku'
             docker run $image bash -c 'which python'
-            docker run $image bash -c 'which terraform'
             docker run $image bash -c 'which wfi'
 
   03_push_image:
