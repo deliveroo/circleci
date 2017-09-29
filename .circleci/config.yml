@@ -63,6 +63,7 @@ jobs:
             docker run $image bash -c 'which docker-compose'
             docker run $image bash -c 'which ensure_head'
             docker run $image bash -c 'which heroku'
+            docker run $image bash -c 'which print_env'
             docker run $image bash -c 'which push_image_to_ecr'
             docker run $image bash -c 'which push_to_heroku'
             docker run $image bash -c 'which python'

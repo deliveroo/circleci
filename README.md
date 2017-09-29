@@ -11,7 +11,7 @@ docker:
 
 ...where `VERSION` equals the version you want to use. Hint: its value is located in the `VERSION` file in this repo.
 
-The image comes with a few standard tools, like `docker`, `docker-compose`, `heroku` CLI, `terraform` CLI, `aws` CLI, and `python` with `pip`. It also has some custom helpers - please see below for details.
+The image comes with a few standard tools, like `docker`, `docker-compose`, `heroku` CLI, `aws` CLI, and `python` with `pip`. It also has some custom helpers - please see below for details.
 
 ## Custom helper: `ci`
 
@@ -94,18 +94,6 @@ In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this
         --aws-region AWS_REGION
 ```
 
-## Custom helper: `push_sha_to_terraform`
-
-`push_sha_to_terraform` wraps around the logic required to change the value of the `sha` variable in your Terraform Enterprise environment, and trigger a new run.
-
-In order to use `push_sha_to_terraform` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo:
-
-```yaml
-- run:
-    name: Push SHA to Terraform
-    command: push_sha_to_terraform ATLAS_ENVIRONMENT
-```
-
 ## Custom helper: `clean_up_reusable_docker`
 
 `clean_up_reusable_docker` wraps around the logic required to remove dangling containers, and old images from the remote Docker host used by CircleCI. It's a way to still be able to use cache, while not wasting all that space:
@@ -114,6 +102,18 @@ In order to use `push_sha_to_terraform` in your CircleCI pipeline, add a step li
 - run:
     name: Clean up reusable Docker
     command: clean_up_reusable_docker
+```
+
+## Custom helper: `print_env`
+
+`print_env` is a Python script which takes prefix and replaces prefixed environment variables with their non-prefixed versions. You're always meant to exec it in-place for the changes to be made to the current shell.:
+
+```yaml
+- run:
+    name: Push to staging
+    command: |
+      `print_env staging`
+      push_to_heroku $staging_app_name
 ```
 
 ## Future work
