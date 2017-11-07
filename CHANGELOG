@@ -1,3 +1,8 @@
+0.1.9
+---
+
+- Bumped versions of `docker` and `docker-compose`;
+
 0.1.8
 ---
 

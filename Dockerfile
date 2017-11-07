@@ -1,17 +1,22 @@
 FROM node:8.2.1-alpine
 
 ENV AWSCLI_VERSION=1.11.129
-ENV DOCKER_VERSION=17.05.0-r0
-RUN apk add --no-cache bash \
-                       curl \
-                       docker=$DOCKER_VERSION \
-                       git \
-                       gzip \
-                       openssh-client \
-                       py-pip \
-                       tar \
+ENV DOCKER_VERSION=17.07.0-r0
+ENV COMPOSE_VERSION=1.17.0
+
+ARG EDGE_REPO=http://dl-cdn.alpinelinux.org/alpine/edge/community
+
+RUN echo $EDGE_REPO >> /etc/apk/repositories \
+    && apk add --no-cache bash \
+                          curl \
+                          docker=${DOCKER_VERSION} \
+                          git \
+                          gzip \
+                          openssh-client \
+                          py-pip \
+                          tar \
     && pip install --upgrade pip \
-    && pip install awscli==${AWSCLI_VERSION} docker-compose
+    && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
 # Install Heroku CLI.
 ENV HEROKU_VERSION=6.13.10
