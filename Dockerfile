@@ -1,4 +1,4 @@
-FROM node:8.2.1-alpine
+FROM node:9.1.0-alpine
 
 ENV AWSCLI_VERSION=1.11.129
 ENV DOCKER_VERSION=17.07.0-r0
@@ -19,7 +19,7 @@ RUN echo $EDGE_REPO >> /etc/apk/repositories \
     && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
 # Install Heroku CLI.
-ENV HEROKU_VERSION=6.13.10
+ENV HEROKU_VERSION=6.14.36
 RUN npm install -g heroku-cli@$HEROKU_VERSION
 
 ADD scripts/ci.sh /usr/bin/ci
