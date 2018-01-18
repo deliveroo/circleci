@@ -2,4 +2,4 @@
 
 set -ex
 
-docker-compose -f docker-compose.ci.yml $@
+docker-compose -f docker-compose.ci.yml "$@"
