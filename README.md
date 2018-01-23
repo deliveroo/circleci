@@ -65,6 +65,18 @@ In order to use `ensure_head`, just add it as a step to your CircleCI config fil
     command: ensure_head
 ```
 
+## Custom helper: `push_lambda`
+
+`push_lambda` is a helper to push an externally generated zip file to S3 and use it to update the source code of a Lambda function. It assumes that `AWS_S3_BUCKET_NAME`, `AWS_S3_OBJECT_KEY` and `AWS_REGION` environment variables are set - either directly or indirectly (see `print_env`),
+
+In order to use `push_lambda`, just add it as a step to your CircleCI config file:
+
+```yaml
+- run:
+    name: Update Lambda function
+    command: push_lambda $function_name
+```
+
 ## Custom helper: `push_to_heroku`
 
 `push_to_heroku` wraps around some of the logic necessary to run a `git push` deployment to Heroku from the CircleCI pipeline. This is meant to replace a GitHub-Heroku integration to provide better visibility into the deployment process. In order to use it, you will need to set two environment variables in the CircleCI project dashboard: `$HEROKU_LOGIN` and `$HEROKU_API_KEY`. The first one is the login (email) of the user on behalf of whom we're running the push. The latter is the long-lived API key for that user. Note: when generating these credentials please use service accounts.
