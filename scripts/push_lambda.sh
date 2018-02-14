@@ -14,7 +14,7 @@ FUNCTION_NAME=$1
 set -ex
 
 # Copy source code to S3.
-ARTEFACT=workspace/paperwatch-${CIRCLE_SHA1}.zip
+ARTEFACT=workspace/${FUNCTION_NAME}-${CIRCLE_SHA1}.zip
 DESTINATION=s3://${AWS_S3_BUCKET_NAME}/${AWS_S3_OBJECT_KEY}
 aws s3 cp ${ARTEFACT} ${DESTINATION}
 
