@@ -19,6 +19,15 @@ The image comes with a few standard tools, like `docker`, `docker-compose`, `her
 
 If you built the Docker Image with `ci build`, `ci tag` can be used to tag the image in a suitable format for the `push_image_to_ecr` script.
 
+```yaml
+# In .circleci/config.yml, add this as one of the steps to build and tag the Docker image
+- run:
+    name: Build and Tag the CI Image
+    command: |
+      ci build
+      ci tag
+```
+
 ## Custom helper: `wfi`
 
 The other helper you can find useful is `wfi`. It's just a `wait-for-it.sh` script with a shorter, more catchy name. Unlike `ci`, which is supposed to be run directly, `wfi` only makes sense to be run from a composition. As an example, let's see a simple Rails test composition:
