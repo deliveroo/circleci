@@ -17,6 +17,8 @@ The image comes with a few standard tools, like `docker`, `docker-compose`, `her
 
 `ci` is just an alias for a more complicated `docker-compose -f docker-compose.ci.yml`. It is opinionated in that it assumes that the Docker composition for your CI pipeline (if you're using one, of course), is stored in a file called `docker-compose.ci.yml`. This way your can reserve your vanilla Docker Compose file (`docker-compose.yml`) just for development purposes.
 
+If you built the Docker Image with `ci build`, `ci tag` can be used to tag the image in a suitable format for the `push_image_to_ecr` script.
+
 ## Custom helper: `wfi`
 
 The other helper you can find useful is `wfi`. It's just a `wait-for-it.sh` script with a shorter, more catchy name. Unlike `ci`, which is supposed to be run directly, `wfi` only makes sense to be run from a composition. As an example, let's see a simple Rails test composition:
