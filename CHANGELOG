@@ -1,3 +1,8 @@
+0.1.16
+---
+
+- Added `set_aws_credentials` script;
+
 0.1.15
 ---
 

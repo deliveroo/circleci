@@ -139,6 +139,21 @@ In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this
       push_to_heroku $staging_app_name
 ```
 
+## Custom helper: `set_aws_credentials`
+
+`set_aws_credentials` is a Python script which takes a `namespace` as an argument and sets the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables with the values that come from their prefixed versions with `{namespace}_`. You're always meant to exec it in-place for the changes to be made to the current shell.:
+
+```yaml
+- run:
+    name: Push to staging
+    command: |
+      `set_aws_credentials staging`
+      push_image_to_ecr \
+        --image-name IMAGE_NAME \
+        --ecr-repo sandbox_my_app_AWS_ECR_REPO_URL \
+        --aws-region AWS_REGION
+```
+
 ## Future work
 
 Over time we may end up adding utilities here to help us work with various other parts of our infrastructure.
