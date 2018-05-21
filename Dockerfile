@@ -1,10 +1,10 @@
 FROM node:9.1.0-alpine
 
 ENV AWSCLI_VERSION=1.11.129
-ENV DOCKER_VERSION=17.12.0-r0
+ENV DOCKER_VERSION=17.12.1-r0
 ENV COMPOSE_VERSION=1.17.0
 
-ARG EDGE_REPO=http://dl-cdn.alpinelinux.org/alpine/edge/community
+ARG EDGE_REPO=http://dl-cdn.alpinelinux.org/alpine/v3.7/community
 
 RUN echo $EDGE_REPO >> /etc/apk/repositories \
     && apk add --no-cache bash \
