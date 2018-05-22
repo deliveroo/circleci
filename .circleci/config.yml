@@ -68,6 +68,7 @@ jobs:
             docker run $image bash -c 'which push_lambda'
             docker run $image bash -c 'which push_to_heroku'
             docker run $image bash -c 'which python'
+            docker run $image bash -c 'which set_aws_credentials'
             docker run $image bash -c 'which wfi'
 
   03_push_image:
