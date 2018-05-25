@@ -22,6 +22,10 @@ while [ "$1" != "" ]; do
       shift
       ECR_REPO=$1
       ;;
+    "--aws-region")
+      shift
+      AWS_REGION=$1
+      ;;
   esac
   shift
 done
@@ -36,7 +40,12 @@ if [ -z "$ECR_REPO" ]; then
   exit 1
 fi
 
-$(aws ecr get-login --no-include-email)
+if [ -z "$AWS_REGION" ]; then
+  echo "Please pass AWS region using --aws-region flag"
+  exit 1
+fi
+
+$(aws ecr get-login --no-include-email --region $AWS_REGION)
 
 set -ex
 

@@ -113,7 +113,8 @@ In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this
     command: |
       push_image_to_ecr \
         --image-name IMAGE_NAME \
-        --ecr-repo ECR_REPO
+        --ecr-repo ECR_REPO \
+        --aws-region AWS_REGION
 ```
 
 ## Custom helper: `clean_up_reusable_docker`
