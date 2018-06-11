@@ -1,3 +1,10 @@
+0.2.0
+---
+
+- Change the base image to debian
+- Remove Heroku CLI and `push_to_heroku` script
+- Install `docker` CLI from upstream release archive (not packages)
+
 0.1.15
 ---
 
