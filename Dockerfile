@@ -23,6 +23,7 @@ RUN apt update \
       openssh-client \
       python \
       python-pip \
+      zip \
     && python2 -m pip install --upgrade pip \
     && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
