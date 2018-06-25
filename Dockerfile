@@ -23,7 +23,6 @@ RUN apt update \
       jq \
       openssh-client \
       python \
-      python3 \
       python-pip \
       zip \
     && python2 -m pip install --upgrade pip \
