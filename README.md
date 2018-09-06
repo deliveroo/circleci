@@ -11,7 +11,7 @@ docker:
 
 ...where `VERSION` equals the version you want to use. Hint: its value is located in the `VERSION` file in this repo.
 
-The image comes with a few standard tools, like `docker`, `docker-compose`, `heroku` CLI, `aws` CLI, and `python` with `pip`. It also has some custom helpers - please see below for details.
+The image comes with a few standard tools, like `bash`, `docker`, `docker-compose`, `heroku` CLI, `aws` CLI, and `python` with `pip`. It also has some custom helpers - please see below for details.
 
 ## Custom helper: `ci`
 
@@ -33,7 +33,7 @@ If you built the Docker Image with `ci build`, `ci tag` can be used to tag the i
 The other helper you can find useful is `wfi`. It's just a `wait-for-it.sh` script with a shorter, more catchy name. Unlike `ci`, which is supposed to be run directly, `wfi` only makes sense to be run from a composition. As an example, let's see a simple Rails test composition:
 
 ```yaml
-version: '3'
+version: "3"
 
 services:
   db:

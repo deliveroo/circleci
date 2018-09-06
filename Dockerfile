@@ -6,7 +6,7 @@ FROM debian as extractor
 ENV DOCKER_VERSION=18.03.1-ce
 RUN apt update && apt install -y curl \
     && curl https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz | \
-       tar xzvf - -C /
+    tar xzvf - -C /
 
 FROM debian
 COPY --from=extractor /docker/docker /usr/bin/docker
@@ -17,13 +17,14 @@ ENV COMPOSE_VERSION=1.21.2
 
 RUN apt update \
     && apt install -y \
-      curl \
-      git \
-      jq \
-      openssh-client \
-      python \
-      python-pip \
-      zip \
+    bash \
+    curl \
+    git \
+    jq \
+    openssh-client \
+    python \
+    python-pip \
+    zip \
     && python2 -m pip install --upgrade pip \
     && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
