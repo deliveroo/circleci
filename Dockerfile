@@ -25,14 +25,16 @@ RUN apt update \
     python \
     python-pip \
     zip \
+    bundler \
+    && gem install rubocop -v 0.62 \
     && python2 -m pip install --upgrade pip \
     && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
-ADD scripts/ci.sh /usr/bin/ci
-ADD scripts/clean_up_reusable_docker.sh /usr/bin/clean_up_reusable_docker
-ADD scripts/ensure_head.sh /usr/bin/ensure_head
-ADD scripts/push_image_to_ecr.sh /usr/bin/push_image_to_ecr
-ADD scripts/pull_image_from_ecr.sh /usr/bin/pull_image_from_ecr
-ADD scripts/print_env.py /usr/bin/print_env
-ADD scripts/push_lambda.sh /usr/bin/push_lambda
-ADD scripts/wait-for-it.sh /usr/bin/wfi
+COPY scripts/ci.sh /usr/bin/ci
+COPY scripts/clean_up_reusable_docker.sh /usr/bin/clean_up_reusable_docker
+COPY scripts/ensure_head.sh /usr/bin/ensure_head
+COPY scripts/push_image_to_ecr.sh /usr/bin/push_image_to_ecr
+COPY scripts/pull_image_from_ecr.sh /usr/bin/pull_image_from_ecr
+COPY scripts/print_env.py /usr/bin/print_env
+COPY scripts/push_lambda.sh /usr/bin/push_lambda
+COPY scripts/wait-for-it.sh /usr/bin/wfi
