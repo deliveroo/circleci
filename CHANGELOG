@@ -1,3 +1,10 @@
+0.2.4
+---
+
+- Retry `docker pull X` and `docker push X` in helper scripts when
+  the commands return a non-0 exit code. By default, retry thrice
+  and allow max-retry-count to be configurable by customer.
+
 0.2.3
 ---
 
