@@ -50,5 +50,10 @@ $(aws ecr get-login --no-include-email --region $AWS_REGION)
 set -ex
 
 target="${ECR_REPO}:${CIRCLE_SHA1}"
-docker pull "${target}"
+
+retry_count=0
+while (( retry_count++ < ${MAX_RETRY_COUNT_FOR_PULLING_DOCKER_IMAGE:-3} )); do
+  docker pull "${target}" && break
+done
+
 docker tag "${target}" "${IMAGE_NAME}:${CIRCLE_SHA1}"

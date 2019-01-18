@@ -51,4 +51,8 @@ set -ex
 
 target=${ECR_REPO}:${CIRCLE_SHA1}
 docker tag ${IMAGE_NAME}:${CIRCLE_SHA1} $target
-docker push $target
+
+retry_count=0
+while (( retry_count++ < ${MAX_RETRY_COUNT_FOR_PUSHING_DOCKER_IMAGE:-3} )); do
+  docker push "${target}" && break
+done
