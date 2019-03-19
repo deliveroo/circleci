@@ -31,6 +31,7 @@ while [ "$1" != "" ]; do
     "--tag")
       shift
       TAGS+=("$1")
+      ;;
   esac
   shift
 done
