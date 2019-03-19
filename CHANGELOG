@@ -1,3 +1,8 @@
+0.2.5
+---
+
+- Allow custom tags to be set in `push_image_to_ecr` script
+
 0.2.4
 ---
 

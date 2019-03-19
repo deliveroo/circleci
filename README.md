@@ -93,7 +93,9 @@ In order to use `push_lambda`, just add it as a step to your CircleCI config fil
 `push_image_to_ecr` wraps around the logic required to use your AWS environment
 variables to log in to an ECR repository and tag and push your local image there. In order to use it, you will need to set two environment variables in the CircleCI project dashboard: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` - these are used by the AWS CLI that lets us retrieve Docker credentials.
 
-In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo. Please mind the fact that options can't use `=` between key and value - it's not supported it in the Bash script.
+Images are tagged with the commit hash by default. It is also possible to add custom tags using the `--tag` argument. In most cases this is not necessary.
+
+In order to use `push_image_to_ecr` in your CircleCI pipeline, add a step like this - ideally you'd want to scope it to a staging or production branch of your repo. Please mind the fact that options can't use `=` between key and value - it's not supported it in the Bash script.
 
 ```yaml
 - run:
@@ -103,6 +105,8 @@ In order to use `push_to_heroku` in your CircleCI pipeline, add a step like this
         --image-name IMAGE_NAME \
         --ecr-repo ECR_REPO \
         --aws-region AWS_REGION
+        --tag customtag1
+        --tag customtag2
 ```
 
 ## Custom helper: `pull_image_from_ecr`
