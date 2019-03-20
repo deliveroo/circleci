@@ -56,7 +56,7 @@ $(aws ecr get-login --no-include-email --region $AWS_REGION)
 set -ex
 
 for TAG in "${TAGS[@]}"; do
-  docker tag ${IMAGE_NAME}:${TAG} ${ECR_REPO}:${TAG}
+  docker tag ${IMAGE_NAME}:${CIRCLE_SHA1} ${ECR_REPO}:${TAG}
 done
 
 for TAG in "${TAGS[@]}"; do
