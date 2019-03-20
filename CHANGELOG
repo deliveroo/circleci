@@ -1,3 +1,8 @@
+0.2.6
+---
+
+- Fix pushing custom tags to ECR
+
 0.2.5
 ---
 

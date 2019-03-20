@@ -55,13 +55,13 @@ $(aws ecr get-login --no-include-email --region $AWS_REGION)
 
 set -ex
 
-target=${ECR_REPO}:${CIRCLE_SHA1}
-
 for TAG in "${TAGS[@]}"; do
-  docker tag ${IMAGE_NAME}:${TAG} $target
+  docker tag ${IMAGE_NAME}:${TAG} ${ECR_REPO}:${TAG}
 done
 
-retry_count=0
-while (( retry_count++ < ${MAX_RETRY_COUNT_FOR_PUSHING_DOCKER_IMAGE:-3} )); do
-  docker push "${target}" && break
+for TAG in "${TAGS[@]}"; do
+  retry_count=0
+  while (( retry_count++ < ${MAX_RETRY_COUNT_FOR_PUSHING_DOCKER_IMAGE:-3} )); do
+    docker push "${ECR_REPO}:${TAG}" && break
+  done
 done
