@@ -33,6 +33,7 @@ ADD scripts/clean_up_reusable_docker.sh /usr/bin/clean_up_reusable_docker
 ADD scripts/ensure_head.sh /usr/bin/ensure_head
 ADD scripts/push_image_to_ecr.sh /usr/bin/push_image_to_ecr
 ADD scripts/pull_image_from_ecr.sh /usr/bin/pull_image_from_ecr
+ADD scripts/push_image_to_docker_hub.sh /usr/bin/push_image_to_docker_hub
 ADD scripts/print_env.py /usr/bin/print_env
 ADD scripts/push_lambda.sh /usr/bin/push_lambda
 ADD scripts/wait-for-it.sh /usr/bin/wfi

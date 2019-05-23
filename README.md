@@ -124,6 +124,26 @@ This command takes the same inputs as the `push_image_to_ecr` helper, except tha
         --awss-region AWS_REGION
 ```
 
+## Custom helper: `push_image_to_docker_hub`
+
+`push_image_to_docker_hub` logs in to Docker Hub and pushes your image there.
+
+You will need to supply your Docker Hub credentials in the `$DOCKER_USER` and `$DOCKER_PASS`
+environment variables.
+
+The script takes at least one full docker image name as a parameter. If you supply multiple
+image names, it will attempt to push each one in a loop.
+
+In order to use `push_image_to_docker_hub` in your CircleCI pipeline, add a step like this:-
+
+```yaml
+- run:
+    name: Push image to docker hub
+    command: |
+      push_image_to_docker_hub \
+        deliveroo/myimage:$(VERSION)
+```
+
 ## Custom helper: `clean_up_reusable_docker`
 
 `clean_up_reusable_docker` wraps around the logic required to remove dangling containers, and old images from the remote Docker host used by CircleCI. It's a way to still be able to use cache, while not wasting all that space:

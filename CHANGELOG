@@ -1,3 +1,8 @@
+0.2.8
+---
+
+- Add the `push_image_to_docker_hub` script
+
 0.2.7
 ---
 
