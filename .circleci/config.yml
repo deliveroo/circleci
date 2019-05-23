@@ -64,6 +64,7 @@ jobs:
             docker run $image bash -c 'which ensure_head'
             docker run $image bash -c 'which print_env'
             docker run $image bash -c 'which push_image_to_ecr'
+            docker run $image bash -c 'which push_image_to_docker_hub'
             docker run $image bash -c 'which pull_image_from_ecr'
             docker run $image bash -c 'which push_lambda'
             docker run $image bash -c 'which python'
