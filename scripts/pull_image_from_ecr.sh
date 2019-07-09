@@ -26,6 +26,14 @@ while [ "${1}" != "" ]; do
       shift
       AWS_REGION="${1}"
       ;;
+    "--tag")
+      shift
+      ECR_TAG="${1}"
+      ;;
+    "--target-tag")
+      shift
+      IMAGE_TAG="${1}"
+      ;;
   esac
   shift
 done
@@ -45,15 +53,24 @@ if [ -z "${AWS_REGION}" ]; then
   exit 1
 fi
 
+if [ -z "${ECR_TAG}" ]; then
+    ECR_TAG="${CIRCLE_SHA1}"
+fi
+
+if [ -z "${IMAGE_TAG}" ]; then
+    IMAGE_TAG="${CIRCLE_SHA1}"
+fi
+
 $(aws ecr get-login --no-include-email --region $AWS_REGION)
 
 set -ex
 
-target="${ECR_REPO}:${CIRCLE_SHA1}"
+REMOTE_IMAGE="${ECR_REPO}:${ECR_TAG}"
+LOCAL_IMAGE="${IMAGE_NAME}:${IMAGE_TAG}"
 
 retry_count=0
 while (( retry_count++ < ${MAX_RETRY_COUNT_FOR_PULLING_DOCKER_IMAGE:-3} )); do
-  docker pull "${target}" && break
+  docker pull "${REMOTE_IMAGE}" && break
 done
 
-docker tag "${target}" "${IMAGE_NAME}:${CIRCLE_SHA1}"
+docker tag "${REMOTE_IMAGE}" "${LOCAL_IMAGE}"

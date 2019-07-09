@@ -121,7 +121,7 @@ This command takes the same inputs as the `push_image_to_ecr` helper, except tha
       pull_image_from_ecr \
         --image-name IMAGE_NAME \
         --ecr-repo ECR_REPO \
-        --awss-region AWS_REGION
+        --aws-region AWS_REGION
 ```
 
 ## Custom helper: `push_image_to_docker_hub`

@@ -1,3 +1,8 @@
+0.2.9
+---
+
+- Allow the `pull_image_from_ecr` script to use alternative image tag than the current commit sha.
+
 0.2.8
 ---
 

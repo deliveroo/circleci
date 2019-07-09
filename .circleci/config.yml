@@ -76,7 +76,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-          # Stored in 1password Team:SETI vault `id_rsa_circleci_circleci`
+          # Stored in 1password "Team:Release Eng" vault `id_rsa_circleci_circleci`
           - "5e:7e:b1:3a:b0:65:dc:7c:07:52:fd:dd:a2:87:02:fc"
 
       - setup_remote_docker:
