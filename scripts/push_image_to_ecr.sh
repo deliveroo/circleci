@@ -65,6 +65,7 @@ push_with_retry() {
             return 1
         else
             warn "Retrying push (attempt $((count+1)))"
+            sleep "$((count*5))"
         fi
     done
 }
