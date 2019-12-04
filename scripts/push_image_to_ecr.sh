@@ -122,5 +122,5 @@ info "Logging in to repo"
 $command || error "Problem logging in to repo"
 
 for tag in "${tags[@]}"; do
-    tag_and_push "${local_image}:${CIRCLE_SHA1}" "${repo_url}:${tag}"
+    tag_and_push "$local_image:$CIRCLE_SHA1" "$repo_url:$tag"
 done
