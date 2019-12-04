@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if [[ -t 2 || -v FORCE_COLOUR ]]; then
+    # Output is a terminal
+    TC_RED="\e[00;31m"
+    TC_GRN="\e[00;32m"
+    TC_CYN="\e[00;36m"
+    TC_YEL="\e[01;33m"
+    TC_LBLU="\e[01;34m"
+    TC_LPUR="\e[01;35m"
+
+    TC_BLD="\e[1m"
+    TC_UND="\e[4m"
+    TC_RST="\e[0m"
+else
+    TC_RED=""
+    TC_GRN=""
+    TC_CYN=""
+    TC_YEL=""
+    TC_LBLU=""
+    TC_LPUR=""
+    TC_BLD=""
+    TC_UND=""
+    TC_RST=""
+fi
+
+# Squelch Shellcheck Warning
+export TC_LBLU
+
+DBG_HDR="${TC_CYN}DEBUG: ${TC_RST}"
+INF_HDR="${TC_GRN}INFO:  ${TC_RST}"
+ERR_HDR="${TC_RED}ERROR: ${TC_RST}"
+WRN_HDR="${TC_YEL}WARN:  ${TC_RST}"
+
+debug() {
+    [[ -v DEBUG ]] && echo -e "$DBG_HDR$*">&2
+}
+
+info() {
+    echo -e "$INF_HDR$*">&2
+}
+
+warn() {
+    echo -e "$WRN_HDR$*">&2
+}
+
+error() {
+    echo -e "$ERR_HDR$*">&2
+    exit 1
+}
+
