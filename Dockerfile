@@ -37,3 +37,4 @@ ADD scripts/push_image_to_docker_hub.sh /usr/bin/push_image_to_docker_hub
 ADD scripts/print_env.py /usr/bin/print_env
 ADD scripts/push_lambda.sh /usr/bin/push_lambda
 ADD scripts/wait-for-it.sh /usr/bin/wfi
+ADD scripts/common /usr/bin/common
