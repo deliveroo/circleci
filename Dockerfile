@@ -28,6 +28,8 @@ RUN apt-get update \
     && python3 -m pip install --upgrade pip \
     && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
+ADD tests /tests
+
 ADD scripts/ci.sh /usr/bin/ci
 ADD scripts/clean_up_reusable_docker.sh /usr/bin/clean_up_reusable_docker
 ADD scripts/ensure_head.sh /usr/bin/ensure_head

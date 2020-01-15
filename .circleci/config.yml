@@ -57,21 +57,7 @@ jobs:
           name: Check if dependecies are installed
           command: |
             set -ex
-            export image=$(./image)
-            docker run $image bash -c 'command -v aws'
-            docker run $image bash -c 'command -v ci'
-            docker run $image bash -c 'command -v clean_up_reusable_docker'
-            docker run $image bash -c 'command -v docker'
-            docker run $image bash -c 'command -v docker-compose'
-            docker run $image bash -c 'command -v ensure_head'
-            docker run $image bash -c 'command -v print_env'
-            docker run $image bash -c 'command -v push_image_to_ecr'
-            docker run $image bash -c 'command -v push_image_to_docker_hub'
-            docker run $image bash -c 'command -v pull_image_from_ecr'
-            docker run $image bash -c 'command -v push_lambda'
-            docker run $image bash -c 'command -v python3'
-            docker run $image bash -c 'command -v wfi'
-            docker run $image docker-compose
+            docker run "$(./image)" '/tests/tests.sh'
 
   03_push_image:
     <<: *defaults
