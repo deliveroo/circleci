@@ -5,6 +5,8 @@
 - Switch to AWS CLI version 1.17.2
 - Switch to Docker Compose version 1.25.0
 
+** NOTE: python scripts must be updated to use Python 3 **
+
 0.3.1
 ---
 

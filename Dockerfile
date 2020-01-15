@@ -4,7 +4,7 @@ FROM debian as extractor
 # the DKMS module and other stuff for running the server.
 # Only install the docker client binary.
 ENV DOCKER_VERSION=18.03.1-ce
-RUN apt-get update && apt-get install -y curl \
+RUN apt update && apt install -y curl \
     && curl https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz | \
     tar xzvf - -C /
 
@@ -15,8 +15,8 @@ COPY --from=extractor /docker/docker /usr/bin/docker
 ENV AWSCLI_VERSION=1.17.2
 ENV COMPOSE_VERSION=1.25.0
 
-RUN apt-get update \
-    && apt-get install -y \
+RUN apt update \
+    && apt install -y \
     bash \
     curl \
     git \
