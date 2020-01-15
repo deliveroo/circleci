@@ -4,7 +4,7 @@ FROM debian as extractor
 # the DKMS module and other stuff for running the server.
 # Only install the docker client binary.
 ENV DOCKER_VERSION=18.03.1-ce
-RUN apt update && apt install -y curl \
+RUN apt-get update && apt-get install -y curl \
     && curl https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz | \
     tar xzvf - -C /
 
@@ -12,20 +12,20 @@ FROM debian
 COPY --from=extractor /docker/docker /usr/bin/docker
 
 # AWS and docker-compose are python programs
-ENV AWSCLI_VERSION=1.15.35
-ENV COMPOSE_VERSION=1.21.2
+ENV AWSCLI_VERSION=1.17.2
+ENV COMPOSE_VERSION=1.25.0
 
-RUN apt update \
-    && apt install -y \
+RUN apt-get update \
+    && apt-get install -y \
     bash \
     curl \
     git \
     jq \
     openssh-client \
-    python \
-    python-pip \
+    python3 \
+    python3-pip \
     zip \
-    && python2 -m pip install --upgrade pip \
+    && python3 -m pip install --upgrade pip \
     && pip install awscli==${AWSCLI_VERSION} docker-compose==${COMPOSE_VERSION}
 
 ADD scripts/ci.sh /usr/bin/ci

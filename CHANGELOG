@@ -1,17 +1,30 @@
+0.4.0
+---
+
+- Switch from Python 2 to Python 3
+- Switch to AWS CLI version 1.17.2
+- Switch to Docker Compose version 1.25.0
+
 0.3.1
 ---
 
 - Missing shared library
+
+** NOTE: `docker-compose` is broken in this version **
 
 0.3.0
 ---
 
 - Rewrite `push_image_to_ecr` changing command line usage totally
 
+** NOTE: `docker-compose` is broken in this version **
+
 0.2.10
 ---
 
 - Small usability improvements to printenv script
+
+** NOTE: `docker-compose` is broken in this version **
 
 0.2.9
 ---
