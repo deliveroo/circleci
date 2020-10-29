@@ -1,9 +1,19 @@
----
+# GLOBAL-ANCHORS - DockerHub Authentication changes applied - PROD-1431 / PROD-1435
+global_context: &global_context
+  context:
+    - org-global
+global_remote_docker: &global_remote_docker
+  version: 19.03.13
+global_dockerhub_auth: &global_dockerhub_auth
+  auth:
+    username: $GLOBAL_DOCKERHUB_USERNAME
+    password: $GLOBAL_DOCKERHUB_PASSWORD
 
 defaults: &defaults
   working_directory: /circleci
   docker:
     - image: docker:17.06.0-ce-git
+      <<: *global_dockerhub_auth
 
 version: 2
 
