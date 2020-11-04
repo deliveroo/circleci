@@ -9,6 +9,6 @@ case "$1" in
     ;;
 
   * )
-    docker-compose -f docker-compose.ci.yml -p "${CIRCLE_PROJECT_REPONAME}" $@"
+    docker-compose -f docker-compose.ci.yml -p "${CIRCLE_PROJECT_REPONAME}" "$@"
     ;;
 esac
