@@ -5,7 +5,7 @@ set -ex
 case "$1" in
 
   "tag" )
-    docker tag "${CIRCLE_PROJECT_REPONAME}":latest "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+    docker tag "${CIRCLE_PROJECT_REPONAME}_app":latest "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
     ;;
 
   * )

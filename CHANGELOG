@@ -1,8 +1,15 @@
+0.5.1
+___
+
+- Fix image name in `ci tag` so it reflects what is set by `ci build` etc
+
 0.5.0
 ---
 
 - Explicitly set the project name in `ci build` and `ci tag` so both
   commands reference the same image. 
+
+** NOTE: `ci tag` won't work in this version, the image name is wrong **
 
 0.4.2
 ---
