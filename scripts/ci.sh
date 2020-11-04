@@ -5,10 +5,10 @@ set -ex
 case "$1" in
 
   "tag" )
-    docker tag project_app:latest "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
+    docker tag "${CIRCLE_PROJECT_REPONAME}":latest "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}"
     ;;
 
   * )
-    docker-compose -f docker-compose.ci.yml "$@"
+    docker-compose -f docker-compose.ci.yml -p "${CIRCLE_PROJECT_REPONAME}" $@"
     ;;
 esac

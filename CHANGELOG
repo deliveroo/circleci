@@ -1,3 +1,9 @@
+0.4.3
+---
+
+- Explicitly set the project name in `ci build` and `ci tag` so both
+  commands reference the same image. 
+
 0.4.2
 ---
 
