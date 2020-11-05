@@ -95,7 +95,7 @@ jobs:
           command: |
             # This fails if the tag already exists
             # preventing a push to the docker hub.
-            git tag "containertest"
+            git tag "$(cat VERSION)"
             git push --tags
 
       - run:
