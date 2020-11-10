@@ -10,7 +10,7 @@ const { Octokit }  = __webpack_require__(276);
 const core = __webpack_require__(24);
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_ACCESS_TOKEN || process.env.GITHUB_TOKEN,
+  auth: process.env.GITHUB_SNYK_TOKEN || process.env.GITHUB_TOKEN,
 });
 
 

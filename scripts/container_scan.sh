@@ -5,8 +5,8 @@ if [ -z "${SNYK_TOKEN}" ]; then
   exit 1
 fi
 
-if [ -z "${GITHUB_ACCESS_TOKEN}" ]; then
-  echo "Please set GITHUB_ACCESS_TOKEN variable in CircleCI project settings"
+if [ -z "${GITHUB_SNYK_TOKEN}" ]; then
+  echo "Please set GITHUB_SNYK_TOKEN variable in CircleCI project settings"
   exit 1
 fi
 
