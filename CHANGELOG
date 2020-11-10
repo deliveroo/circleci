@@ -1,3 +1,10 @@
+0.6.0
+---
+
+- Added `scan_container_vulnerabilities` script;
+
+** NOTE: This requires both a `SNYK_TOKEN` and `GITHUB_SNYK_TOKEN`
+
 0.5.2
 ---
 
