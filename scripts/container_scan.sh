@@ -42,4 +42,10 @@ echo "[*] Finished snyk monitoring. Checking if we need to send results to GitHu
 ## parse results and check if we should comment back to GitHub
 scan_results=$(parse_scan_results ${PROJECT_PATH}/${SNYK_FNAME})
 
-[[ $scan_results ]] && comment_on_pr "$scan_results"
+if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
+  echo "Not a pull request. Exiting"
+elif [[ $scan_results ]]; then
+   	comment_on_pr "$scan_results"
+else
+	echo "No scan results found. Exiting."
+fi
