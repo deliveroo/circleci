@@ -44,6 +44,7 @@ ADD scripts/print_env.py /usr/bin/print_env
 ADD scripts/push_lambda.sh /usr/bin/push_lambda
 ADD scripts/wait-for-it.sh /usr/bin/wfi
 ADD scripts/common /usr/bin/common
-ADD scripts/container_scan.sh /usr/bin/scan_container_vulnerabilities
+ADD scripts/vulnerabilities_scanner.sh /usr/bin/scan_container_vulnerabilities
+ADD scripts/vulnerabilities_scanner.sh /usr/bin/vulnerabilities_scanner
 ADD scripts/comment_on_pr.js /usr/bin/comment_on_pr
 ADD scripts/parse_scan_results.js /usr/bin/parse_scan_results

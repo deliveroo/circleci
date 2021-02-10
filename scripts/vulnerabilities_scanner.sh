@@ -17,35 +17,43 @@ else
   TAG_NAME="latest"
 fi
 
+parse_and_post_comment () {
+  scan_results=$(parse_scan_results $1)
+  if [[ $scan_results ]]; then
+      comment_on_pr "$scan_results"
+  else
+    echo "No scan results found in $1."
+  fi
+}
+
 ## auth
 snyk auth ${SNYK_TOKEN}
 
 ## set project path
 PROJECT_PATH=$(eval echo ${CIRCLE_WORKING_DIRECTORY})
 
-## set tag
-SNYK_FNAME=snyk.json
-
 ## lets retag the image
 docker image tag ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME}
 
-## test 
-snyk test --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file=${PROJECT_PATH}/Dockerfile --json > ${PROJECT_PATH}/${SNYK_FNAME}
+## test container
+snyk test --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file=${PROJECT_PATH}/Dockerfile --json > "${PROJECT_PATH}/snyk-container.json"
+
+## test app
+snyk test --json > "${PROJECT_PATH}/snyk-app.json"
 
 echo "[*] Finished snyk test. Moving onto monitor"
 
-## monitor
+## monitor app
+snyk monitor
+
+## monitor container
 snyk monitor --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file="${PROJECT_PATH}/Dockerfile"
 
 echo "[*] Finished snyk monitoring. Checking if we need to send results to GitHub"
 
-## parse results and check if we should comment back to GitHub
-scan_results=$(parse_scan_results ${PROJECT_PATH}/${SNYK_FNAME})
-
 if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
   echo "Not a pull request. Exiting"
-elif [[ $scan_results ]]; then
-   	comment_on_pr "$scan_results"
 else
-	echo "No scan results found. Exiting."
+  parse_and_post_comment "${PROJECT_PATH}/snyk-container.json"
+  parse_and_post_comment "${PROJECT_PATH}/snyk-app.json"
 fi
