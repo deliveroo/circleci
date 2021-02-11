@@ -10,12 +10,8 @@ if [ -z "${GITHUB_SNYK_TOKEN}" ]; then
   exit 1
 fi
 
-if [[ $CONTAINER_TAG ]]; then
-  TAG_NAME=$CONTAINER_TAG
-  echo "Tag from \$CONTAINER_TAG: $CONTAINER_TAG"
-else
-  TAG_NAME="latest"
-fi
+TAG_NAME=${CONTAINER_TAG:="latest"}
+SEVERITY_THRESHOLD=${SNYK_SEVERITY_THRESHOLD:="high"}
 
 parse_and_post_comment () {
   scan_results=$(parse_scan_results $1)
@@ -36,10 +32,10 @@ PROJECT_PATH=$(eval echo ${CIRCLE_WORKING_DIRECTORY})
 docker image tag ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME}
 
 ## test container
-snyk test --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file=${PROJECT_PATH}/Dockerfile --json > "${PROJECT_PATH}/snyk-container.json"
+snyk test --severity-threshold=${SEVERITY_THRESHOLD} --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file=${PROJECT_PATH}/Dockerfile --json > "${PROJECT_PATH}/snyk-container.json"
 
 ## test app
-snyk test --json > "${PROJECT_PATH}/snyk-app.json"
+snyk test --severity-threshold=${SEVERITY_THRESHOLD} --json > "${PROJECT_PATH}/snyk-app.json"
 
 echo "[*] Finished snyk test. Moving onto monitor"
 

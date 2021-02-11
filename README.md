@@ -199,20 +199,21 @@ In order to use `push_image_to_docker_hub` in your CircleCI pipeline, add a step
       push_to_heroku $staging_app_name
 ```
 
-## Custom helper: `scan_container_vulnerabilities`
+## Custom helper: `vulnerabilities_scanner`
 
-`scan_container_vulnerabilities` is a bash script that wraps snyk container testing & monitoring which then parses the results into GitHub readable markdown and sends vulnerability notifications back to the original PR where appropriate. 
+`vulnerabilities_scanner` is a bash script that wraps snyk container and application testing & monitoring which then parses the results into GitHub readable markdown and sends vulnerability notifications back to the original PR where appropriate.
 
 ```yaml
 - run:
-    name: Scan container vulnerabilities
-    command: scan_container_vulnerabilities
+    name: Vulnerabilities scanner
+    command: vulnerabilities_scanner
 ```
 
 Additional args:
 
 - `NO_COMMENT` overrides the default behaviour of commenting back to the PR
 - `CONTAINER_TAG` sets a custom tag for container images 
+- `SNYK_SEVERITY_THRESHOLD` sets the threshold for the severity of the vulnerabilities to report back to the user. Possible values are: `low`, `medium` or `high`. Defaults to `high`.
 
 ## Future work
 
