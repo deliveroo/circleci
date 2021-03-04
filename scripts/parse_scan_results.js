@@ -33,8 +33,10 @@ const vulnOutput = json_data.vulnerabilities.reduce((acc, curr) => {
 
 markDownString+=(
   `\n\nTested ${json_data.dependencyCount} dependencies for ` +
-  `known issues, found *${json_data.uniqueCount}* ` + 
-  `${json_data.uniqueCount > 1 ? 'issues' : 'issue'}.\n\n` +
+  `known issues with the severity filter set to **${process.env.SEVERITY_THRESHOLD}**. ` +
+  `Found *${json_data.uniqueCount}* ${json_data.uniqueCount > 1 ? 'issues' : 'issue'}.\n\n` +
+  `Please review our [best practices for containers](https://docs.deliveroo.net/security/container_best_practices.html) ` +
+  `and our [vulnerability management framework](https://docs.deliveroo.net/security/vulnerability_management_framework.html)\n\n` +
   `<details>
   <summary>Click to see details</summary>\n
 `);
