@@ -11,7 +11,7 @@ if [ -z "${GITHUB_SNYK_TOKEN}" ]; then
 fi
 
 TAG_NAME=${CONTAINER_TAG:="latest"}
-SEVERITY_THRESHOLD=${SNYK_SEVERITY_THRESHOLD:="high"}
+export SEVERITY_THRESHOLD=${SNYK_SEVERITY_THRESHOLD:="high"}
 
 parse_and_post_comment () {
   scan_results=$(parse_scan_results $1)
