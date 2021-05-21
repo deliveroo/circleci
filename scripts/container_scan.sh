@@ -10,13 +10,10 @@ if [ -z "${GITHUB_SNYK_TOKEN}" ]; then
   exit 1
 fi
 
-TAG_NAME=${CONTAINER_TAG:="latest"}
-
 ## set threshold to critical
 export SEVERITY_THRESHOLD=${SNYK_SEVERITY_THRESHOLD:="critical"}
 
-## set organisation
-snyk config set org=${SNYK_ORG}
+TAG_NAME=${CONTAINER_TAG:="latest"}
 
 parse_and_post_comment () {
   scan_results=$(parse_scan_results $1)
@@ -29,6 +26,9 @@ parse_and_post_comment () {
 
 ## auth
 snyk auth ${SNYK_TOKEN}
+
+## set organisation
+snyk config set org=${SNYK_ORG}
 
 ## set project path
 PROJECT_PATH=$(eval echo ${CIRCLE_WORKING_DIRECTORY})
