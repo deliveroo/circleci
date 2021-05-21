@@ -213,7 +213,7 @@ Additional args:
 
 - `NO_COMMENT` overrides the default behaviour of commenting back to the PR
 - `CONTAINER_TAG` sets a custom tag for container images 
-- `SNYK_SEVERITY_THRESHOLD` sets the threshold for the severity of the vulnerabilities to report back to the user. Possible values are: `low`, `medium` or `high`. Defaults to `high`.
+- `SNYK_SEVERITY_THRESHOLD` sets the threshold for the severity of the vulnerabilities to report back to the user. Possible values are: `low`, `medium`, `high` or `critical`. Defaults to `critical`. Snyk's rating [reference](https://support.snyk.io/hc/en-us/articles/360020021058-Critical-severity-migration).
 
 ## Future work
 
