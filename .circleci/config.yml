@@ -121,4 +121,3 @@ workflows:
             branches:
               only:
                 - master
-                - update_snyk_may_2021
