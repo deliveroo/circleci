@@ -5,9 +5,10 @@ let markDownString = '';
 
 const getSeverityString = (input) => {
   const severities = {
-    high:   `![#b51b72](https://via.placeholder.com/15/b51b72/000000?text=+) \`High\``,
+    critical: `![#b51b72](https://via.placeholder.com/15/f54251/000000?text=+) \`Critical\``,
+    high: `![#b51b72](https://via.placeholder.com/15/b51b72/000000?text=+) \`High\``,
     medium: `![#e29022](https://via.placeholder.com/15/e29022/000000?text=+) \`Medium\``,
-    low:    `![#222049](https://via.placeholder.com/15/222049/000000?text=+) \`Low\``,
+    low: `![#222049](https://via.placeholder.com/15/222049/000000?text=+) \`Low\``,
   }
   return severities.hasOwnProperty(input.severity)
     ? `${severities[input.severity]} severity found in \`${input.name}\``
@@ -18,20 +19,20 @@ let vulnTracker = new Set();
 const vulnOutput = json_data.vulnerabilities.reduce((acc, curr) => {
   let tempStr = '';
   if (!vulnTracker.has(curr.title)) {
-    tempStr+=(`#### ${getSeverityString(curr)}`);
-    tempStr+=(`\n**Description**: [${curr.title}](https://snyk.io/vuln/${curr.id}) `);
-    tempStr+=(`\\\n**Introduced through**: ${curr.from.join(' -> ')}`);
-    tempStr+=(`\\\n**Introduced by** your base image (${curr.dockerBaseImage})`);
-    (curr.nearestFixedInVersion) ? tempStr+= (`\\\n\`Fix available\` in: ${curr.nearestFixedInVersion} `) : '';
+    tempStr += (`#### ${getSeverityString(curr)}`);
+    tempStr += (`\n**Description**: [${curr.title}](https://snyk.io/vuln/${curr.id}) `);
+    tempStr += (`\\\n**Introduced through**: ${curr.from.join(' -> ')}`);
+    tempStr += (`\\\n**Introduced by** your base image (${curr.dockerBaseImage})`);
+    (curr.nearestFixedInVersion) ? tempStr += (`\\\n\`Fix available\` in: ${curr.nearestFixedInVersion} `) : '';
 
-    tempStr+=(`\n\n`);
+    tempStr += (`\n\n`);
   }
 
   vulnTracker.add(curr.title);
   return acc + tempStr;
 }, '');
 
-markDownString+=(
+markDownString += (
   `\n\nTested ${json_data.dependencyCount} dependencies for ` +
   `known issues with the severity filter set to **${process.env.SEVERITY_THRESHOLD}**. ` +
   `Found *${json_data.uniqueCount}* ${json_data.uniqueCount > 1 ? 'issues' : 'issue'}.\n\n` +
@@ -41,12 +42,12 @@ markDownString+=(
   <summary>Click to see details</summary>\n
 `);
 
-markDownString+=(vulnOutput);
+markDownString += (vulnOutput);
 
 
 /* Ok, lets grab the remediation advice. We pretty much need to split up the 
  *  * message strings and determine if theres 5 or more spaces in between */
-const isMessageTable = (input)  => (!!input.match(/\s{2}/));
+const isMessageTable = (input) => (!!input.match(/\s{2}/));
 const advisoryTable = json_data.docker.baseImageRemediation.advice;
 const convertAdvisoryToArray = message =>
   message
@@ -66,17 +67,17 @@ const convertArrayToMarkdownTable = (arr) => {
 };
 
 
-advisoryTable.map((x, idx) => { 
+advisoryTable.map((x, idx) => {
   if (isMessageTable(x.message)) {
     const arr = convertAdvisoryToArray(x.message);
     const table = convertArrayToMarkdownTable(arr);
-    markDownString+=(table);
+    markDownString += (table);
   }
   else if (x.bold) {
-    markDownString+=(`\n\n**${x.message.replace('\n', '')}**\n`);
+    markDownString += (`\n\n**${x.message.replace('\n', '')}**\n`);
   }
 });
 
-markDownString+=(`</details>`);
-(vulnOutput.length > 1)  && console.log(markDownString);
+markDownString += (`</details>`);
+(vulnOutput.length > 1) && console.log(markDownString);
 

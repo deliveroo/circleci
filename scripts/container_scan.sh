@@ -30,28 +30,24 @@ snyk auth ${SNYK_TOKEN}
 ## set organisation
 snyk config set org=${SNYK_ORG}
 
-## set project path
-PROJECT_PATH=$(eval echo ${CIRCLE_WORKING_DIRECTORY})
-
 ## set tag
 SNYK_FNAME=snyk.json
 
-## lets retag the image
-docker image tag ${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME}
+## set file location of scan results
+export RESULTS=${HOME}/${SNYK_FNAME}
 
-## test 
-snyk test --severity-threshold=${SEVERITY_THRESHOLD} --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file=${PROJECT_PATH}/Dockerfile --json > "${PROJECT_PATH}/${SNYK_FNAME}"
+## test the repos language dependencies ( not the container )
+echo "[*]starting snyk test of progamming language(s). Looking for manifest files..."
+snyk test --severity-threshold=${SEVERITY_THRESHOLD} --all-projects --remote-repo-url="${CIRCLE_REPOSITORY_URL}"
 
-echo "[*] Finished snyk test. Moving onto monitor"
+## send language dependencies scan result to Snyk
+snyk monitor --all-projects --remote-repo-url="${CIRCLE_REPOSITORY_URL}"
 
-## monitor
-snyk monitor --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file="${PROJECT_PATH}/Dockerfile"
-
-echo "[*] Finished snyk monitoring. Checking if we need to send results to GitHub"
-
-## parse results and check if we should comment back to GitHub
+## test the repos language dependencies ( not the container )
+echo "[*]Checking if results should be sent to GitHub"
 if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
-  echo "Not a pull request. Exiting"
+  echo "[*]Not a pull request"
 else
-  parse_and_post_comment "${PROJECT_PATH}/${SNYK_FNAME}"
+  snyk test --severity-threshold=${SEVERITY_THRESHOLD} --docker ${CIRCLE_PROJECT_REPONAME}:${TAG_NAME} --file=${HOME}/Dockerfile --json > ${RESULTS}
+  parse_and_post_comment "${RESULTS}"
 fi

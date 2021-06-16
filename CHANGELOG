@@ -1,3 +1,8 @@
+0.6.5
+---
+
+Re-orientates the Snyk CLI tool usage to scan for issues that are found in manifest files, fixable.  In addition, this speeds up build times [ by removing the long running container scan, unless it is a Pull Request ].
+
 0.6.4
 ---
 

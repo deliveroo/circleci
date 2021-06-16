@@ -121,3 +121,4 @@ workflows:
             branches:
               only:
                 - master
+                - modify_snyk_for_speed_and_license
